@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { generateAccessToken } from "../../utils/jwt";
+import { generateAccessToken, generateRefreshToken } from "../../utils/jwt";
 import prisma from "../../utils/prisma";
 
 export class AuthService {
@@ -20,7 +20,11 @@ export class AuthService {
         ) {
             throw new Error("Sai tài khoản hoặc mật khẩu");
         }
-        const token = generateAccessToken({ id: user.id, email: user.email });
-        return { user, token };
+        const accessToken = generateAccessToken({
+            id: user.id,
+            email: user.email,
+        });
+        const refreshToken = generateRefreshToken({ id: user.id });
+        return { user, accessToken, refreshToken };
     }
 }

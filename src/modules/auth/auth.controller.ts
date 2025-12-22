@@ -22,4 +22,8 @@ export class AuthController {
             sendError(res, e.message, 401);
         }
     };
+
+    logout = async (req: Request, res: Response) => {
+        sendSuccess(res, "Đăng xuất thành công", null, 204);
+    };
 }
