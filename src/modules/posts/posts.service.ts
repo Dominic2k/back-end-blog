@@ -66,6 +66,20 @@ export class PostsService {
         });
     }
 
+    async publish(id: number) {
+        return await prisma.post.update({
+            where: { id },
+            data: { published: true },
+        });
+    }
+
+    async unpublish(id: number) {
+        return await prisma.post.update({
+            where: { id },
+            data: { published: false },
+        });
+    }
+
     async delete(id: number) {
         return await prisma.post.delete({
             where: { id },

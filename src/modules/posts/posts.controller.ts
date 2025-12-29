@@ -60,6 +60,26 @@ export class PostsController {
         }
     };
 
+    publish = async (req: any, res: Response) => {
+        try {
+            const id = Number(req.params.id);
+            const post = await postsService.publish(id);
+            sendSuccess(res, "Xuất bản bài viết thành công", post);
+        } catch (e: any) {
+            sendError(res, e.message);
+        }
+    };
+
+    unpublish = async (req: any, res: Response) => {
+        try {
+            const id = Number(req.params.id);
+            const post = await postsService.unpublish(id);
+            sendSuccess(res, "Hủy xuất bản bài viết thành công", post);
+        } catch (e: any) {
+            sendError(res, e.message);
+        }
+    };
+
     delete = async (req: any, res: Response) => {
         try {
             const id = Number(req.params.id);

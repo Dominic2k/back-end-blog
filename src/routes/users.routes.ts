@@ -8,6 +8,8 @@ const usersController = new UsersController();
 
 router.get("/:id", usersController.getUser);
 
+router.get("/:id/posts", usersController.getUserPosts);
+
 router.put(
     "/:id",
     authMiddleware,

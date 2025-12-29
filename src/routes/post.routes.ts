@@ -20,6 +20,18 @@ router.get("/:id", (req, res, next) => {
 router.post("/", authMiddleware, postsController.create);
 
 router.put("/:id", authMiddleware, checkOwner("post"), postsController.update);
+router.patch(
+    "/:id/publish",
+    authMiddleware,
+    checkOwner("post"),
+    postsController.publish
+);
+router.patch(
+    "/:id/unpublish",
+    authMiddleware,
+    checkOwner("post"),
+    postsController.unpublish
+);
 router.delete(
     "/:id",
     authMiddleware,
@@ -28,5 +40,7 @@ router.delete(
 );
 
 router.post("/:id/comments", authMiddleware, commentsController.create);
+
+router.get("/:id/comments", commentsController.getByPostId);
 
 export default router;

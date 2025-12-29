@@ -16,6 +16,22 @@ export class UsersController {
         }
     };
 
+    getUserPosts = async (req: Request, res: Response) => {
+        try {
+            const id = Number(req.params.id);
+            const page = Number(req.query.page) || 1;
+            const limit = Number(req.query.limit) || 10;
+            const data = await usersService.getUserPosts(id, page, limit);
+            sendSuccess(
+                res,
+                "Lấy danh sách bài viết của người dùng thành công",
+                data
+            );
+        } catch (e: any) {
+            sendError(res, e.message);
+        }
+    };
+
     updateUser = async (req: any, res: Response) => {
         try {
             const id = Number(req.params.id);

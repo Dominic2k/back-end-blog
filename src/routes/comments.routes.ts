@@ -6,7 +6,6 @@ import { checkOwner } from "../middleware/checkOwner.middleware";
 const router = Router();
 const commentsController = new CommentsController();
 
-// DELETE /api/comments/:id (auth, owner)
 router.delete(
     "/:id",
     authMiddleware,

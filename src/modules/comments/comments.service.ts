@@ -8,6 +8,14 @@ export class CommentsService {
         });
     }
 
+    async getByPostId(postId: number) {
+        return await prisma.comment.findMany({
+            where: { postId },
+            include: { author: { select: { username: true } } },
+            orderBy: { createdAt: "desc" },
+        });
+    }
+
     async delete(id: number) {
         return await prisma.comment.delete({
             where: { id },

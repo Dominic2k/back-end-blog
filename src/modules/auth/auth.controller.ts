@@ -43,4 +43,14 @@ export class AuthController {
     logout = async (req: Request, res: Response) => {
         sendSuccess(res, "Đăng xuất thành công", null, 204);
     };
+
+    getProfile = async (req: any, res: Response) => {
+        try {
+            const userId = req.user.id;
+            const user = await authService.getProfile(userId);
+            sendSuccess(res, "Lấy thông tin profile thành công", user);
+        } catch (e: any) {
+            sendError(res, e.message);
+        }
+    };
 }

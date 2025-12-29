@@ -60,4 +60,18 @@ export class AuthService {
             throw new Error("Invalid refresh token");
         }
     }
+
+    async getProfile(userId: number) {
+        return await prisma.user.findUnique({
+            where: { id: userId },
+            select: {
+                id: true,
+                username: true,
+                email: true,
+                avatar: true,
+                bio: true,
+                createdAt: true,
+            },
+        });
+    }
 }

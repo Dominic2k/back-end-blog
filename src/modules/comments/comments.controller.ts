@@ -20,6 +20,16 @@ export class CommentsController {
         }
     };
 
+    getByPostId = async (req: Request, res: Response) => {
+        try {
+            const postId = Number(req.params.id);
+            const comments = await commentsService.getByPostId(postId);
+            sendSuccess(res, "Lấy danh sách bình luận thành công", comments);
+        } catch (e: any) {
+            sendError(res, e.message);
+        }
+    };
+
     delete = async (req: any, res: Response) => {
         try {
             const id = Number(req.params.id);
